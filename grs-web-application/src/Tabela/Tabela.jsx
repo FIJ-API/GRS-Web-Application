@@ -1,13 +1,19 @@
 import Linha from "../Linha/Linha";
+import "./Tabela.css"
 
-const Tabela = ({ dados, adicionarLinha }) => {
+const Tabela = ({ dados, toogleModal, deleteBodyCam }) => {
+
+    const handleToogleModal = () => {
+        toogleModal(null);
+    }
 
     return (
-        <div className="p-4">
+        <div className="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th>Modulo</th>
+                        <th>Id</th>
+                        <th>Modelo</th>
                         <th>Número de Série</th>
                         <th>Chip</th>
                         <th>Estado</th>
@@ -19,13 +25,13 @@ const Tabela = ({ dados, adicionarLinha }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th colSpan="9">
-                            <button onClick={adicionarLinha}>+</button>
+                    {/* <tr>
+                        <th colSpan="10">
+                            <button onClick={handleToogleModal}>+</button>
                         </th>
-                    </tr>
+                    </tr> */}
                     {dados.map((item) => (
-                        <Linha item={item} />
+                        <Linha item={item} deleteBodyCam={deleteBodyCam} toogleModal={toogleModal} />
                     ))}
                 </tbody>
             </table>

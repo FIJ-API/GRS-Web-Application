@@ -1,25 +1,29 @@
 import "./Linha.css"
 
-const Linha = ({ item }) => {
+const Linha = ({ item, deleteBodyCam, toogleModal }) => {
 
     const handleRemover = () => {
-        fetch(`http://localhost:8080/bodycams/${id}`, {
-            method: 'DELETE'
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                setDados(data)
-            })
-            .catch((error) => console.error("Erro ao buscar dados: ", error));
+        deleteBodyCam(item.idBodyCam);
     }
 
     const handleEditar = () => {
-        console.log("editar");
+        const bodycam = {
+            idBodyCam: item.idBodyCam,
+            modelo: item.modelo,
+            numeroDeSerie: item.numeroDeSerie,
+            chip: item.chip,
+            estado: item.estado,
+            vendedor: item.vendedor,
+            revenda: item.revenda,
+            saida: item.saida,
+        }
+
+        toogleModal(bodycam)
     }
 
     return (
         <tr>
+            <td>{item.idBodyCam}</td>
             <td>{item.modelo}</td>
             <td>{item.numeroDeSerie}</td>
             <td>{item.chip == true ? "Sim" : "Não"}</td>

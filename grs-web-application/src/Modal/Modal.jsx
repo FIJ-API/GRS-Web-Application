@@ -3,23 +3,29 @@ import React from "react";
 import './Modal.css';
 import SwitchButton from "../SwitchButton/SwitchButton";
 
-const Modal = ({ showModal, fechar, enviarDados }) => {
+const Modal = ({ showModal, fechar, postBodyCam, putBodyCam, bodycam }) => {
     if (!showModal) return null;
 
-    const [isOn, setIsOn] = useState(false);
+
+    const [modelo, setModelo] = useState(bodycam?.modelo || "");
+    const [numeroDeSerie, setNumeroDeSerie] = useState(bodycam?.numeroDeSerie || "");
+    const [estado, setEstado] = useState(bodycam?.estado || "");
+    const [vendedor, setVendedor] = useState(bodycam?.vendedor || "");
+    const [revenda, setRevenda] = useState(bodycam?.revenda || "");
+    const [diasAVencer, setDiasAVencer] = useState(bodycam?.diasAVencer || "");
+    const [chip, setChip] = useState(bodycam?.chip || false);
 
     const modalRef = useRef(null);
 
-    const handleSubmit = () => {
-        const modelo = document.getElementById('modelo').value;
-        const numeroDeSerie = document.getElementById('numeroDeSerie').value;
-        const estado = document.getElementById('estado').value;
-        const vendedor = document.getElementById('vendedor').value;
-        const revenda = document.getElementById('revenda').value;
-        const diasAVencer = document.getElementById('diasAVencer').value;
-
-        enviarDados(modelo, numeroDeSerie, isOn, estado, vendedor, revenda, diasAVencer);
+    const handlePostBodyCam = () => {
+        const newBodyCam = { modelo, numeroDeSerie, chip, estado, vendedor, revenda, diasAVencer };
+        postBodyCam(newBodyCam);
     };
+
+    const handlePutBodyCam = () => {
+        const modifiedBodyCam = { modelo, numeroDeSerie, chip, estado, vendedor, revenda }
+        putBodyCam(modifiedBodyCam, bodycam.idBodyCam);
+    }
 
     const handleDragStart = (e) => {
         const modalElement = modalRef.current;
@@ -46,38 +52,51 @@ const Modal = ({ showModal, fechar, enviarDados }) => {
                 <div className="modal-header" onMouseDown={handleDragStart}>
                     <div className="header-box"></div>
                 </div>
-                    <span className="close" onClick={fechar}>&times;</span>
-                <h2>Adicionar Body-Cam</h2>
+                <span className="close" onClick={fechar}>&times;</span>
+                <h2>{bodycam == null ? "Adicionar BodyCam" : `Editar BodyCam${bodycam.idBodyCam}`}</h2>
                 <form onSubmit={(e) => e.preventDefault()}>
                     <label>
-                        Modulo:
-                        <input type="text" id="modelo" />
+                        Modelo:
+                        <input autocomplete="off" type="text" id="modelo" value={modelo} onChange={(e) => setModelo(e.target.value)} />
                     </label>
                     <label>
                         Número de Série:
-                        <input type="text" id="numeroDeSerie" />
+                        <input autocomplete="off" type="text" id="numeroDeSerie" value={numeroDeSerie} onChange={(e) => setNumeroDeSerie(e.target.value)} />
                     </label>
                     <label>
                         Chip:
-                        <SwitchButton isOn={isOn} setIsOn={setIsOn} />
+                        <SwitchButton chip={chip} setChip={setChip} />
                     </label>
                     <label>
                         Estado:
-                        <input type="text" id="estado" />
+                        <input autocomplete="off" type="text" id="estado" value={estado} onChange={(e) => setEstado(e.target.value)} />
                     </label>
                     <label>
                         Vendedor:
-                        <input type="text" id="vendedor" />
+                        <input autocomplete="off" type="text" id="vendedor" value={vendedor} onChange={(e) => setVendedor(e.target.value)} />
                     </label>
                     <label>
                         Revenda:
-                        <input type="text" id="revenda" />
+                        <input autocomplete="off" type="text" id="revenda" value={revenda} onChange={(e) => setRevenda(e.target.value)} />
                     </label>
-                    <label>
-                        Dias a Vencer:
-                        <input type="number" id="diasAVencer" />
-                    </label>
-                    <button type="button" onClick={handleSubmit}>Enviar</button>
+                    {bodycam == null ? (
+                        <>
+                            <label>
+                                Dias a Vencer:
+                                <input
+                                    autoComplete="off"
+                                    type="number"
+                                    id="diasAVencer"
+                                    value={diasAVencer}
+                                    onChange={(e) => setDiasAVencer(Number(e.target.value) || 0)}
+                                />
+                            </label>
+                            <button type="button" onClick={handlePostBodyCam}>Enviar</button>
+                        </>
+                    ) : (
+                        <button type="button" onClick={handlePutBodyCam}>Enviar Alterações</button>
+                    )}
+
                 </form>
             </div>
         </div>

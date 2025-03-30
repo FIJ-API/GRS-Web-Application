@@ -7,28 +7,21 @@ function App() {
 
   const [dados, setDados] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [bodycam, setBodycam] = useState(false);
 
-  useEffect(() => {
+  const getBodyCams = () => {
     fetch("http://localhost:8080/bodycams")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setDados(data)
+        console.log(data);
       })
       .catch((error) => console.error("Erro ao buscar dados: ", error));
-  }, []);
+  }
 
-  const adicionarLinha = () => {
-    setShowModal(true);
-  };
+  const postBodyCam = (newBodyCam) => {
+    const formattedBodycam = JSON.stringify(newBodyCam);
 
-  const fecharModal = () => {
-    setShowModal(false);
-  };
-
-  const enviarDados = (modelo, numeroDeSerie, isOn, estado, vendedor, revenda, diasAVencer) => {
-    const bodycam = { modelo, numeroDeSerie, isOn, estado, vendedor, revenda, diasAVencer }
-    const formattedBodycam = JSON.stringify(bodycam);
     fetch("http://localhost:8080/bodycams", {
       method: 'POST',
       headers: {
@@ -38,24 +31,64 @@ function App() {
     })
       .then((res) => {
         console.log(res)
+        toogleModal();
+        getBodyCams();
       })
       .catch((error) => console.error(error)
       )
-
-    fecharModal();
   }
+
+  const putBodyCam = (modifiedBodyCam, idBodyCam) => {
+    const formattedBodycam = JSON.stringify(modifiedBodyCam);
+
+    fetch(`http://localhost:8080/bodycams/${idBodyCam}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: formattedBodycam,
+    })
+      .then((res) => {
+        console.log(res)
+        toogleModal();
+        getBodyCams();
+      })
+      .catch((error) => console.error(error)
+      )
+  }
+
+  const deleteBodyCam = (idBodyCam) => {
+    fetch(`http://localhost:8080/bodycams/${idBodyCam}`, {
+      method: 'DELETE'
+    })
+      .then((res) => {
+        console.log(res)
+        getBodyCams();
+      })
+      .catch((error) => console.error("Erro ao remover bodycam" + item.idBodyCam + ": " + error));
+  }
+
+  const toogleModal = (bodycam) => {
+    setShowModal(!showModal);
+    setBodycam(bodycam);
+  };
+
+  const handleToogleModal = () => {
+    toogleModal(null);
+  }
+
+  useEffect(() => {
+    getBodyCams();
+  }, []);
 
   return (
     <div>
       <center>
-        <h1>BodyCam</h1>
+        <h2>BodyCam</h2>
       </center>
-      <Tabela dados={dados} adicionarLinha={adicionarLinha} />
-      <Modal
-        showModal={showModal}
-        fechar={fecharModal}
-        enviarDados={enviarDados}
-      />
+      <Tabela dados={dados} toogleModal={toogleModal} deleteBodyCam={deleteBodyCam} />
+      <Modal showModal={showModal} fechar={toogleModal} postBodyCam={postBodyCam} putBodyCam={putBodyCam} bodycam={bodycam} />
+      <button className="adicionarNovaLinha" onClick={handleToogleModal}>+</button>
     </div>
   )
 }
