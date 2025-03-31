@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Arquivo</title>
+</head>
+
+<style>
+    body {
+        background: #242424;
+        color: #e0e0e0;
+    }
+</style>
+<body>
+
+    <h2>Upload de Arquivo</h2>
+    
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile()">Enviar</button>
+
+    <p id="status"></p>
+
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById("fileInput");
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert("Selecione um arquivo!");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            try {
+                const response = await fetch("http://localhost:8080/bodycams/upload", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.text();
+                document.getElementById("status").innerText = "Resposta: " + result;
+            } catch (error) {
+                document.getElementById("status").innerText = "Erro ao enviar: " + error;
+            }
+        }
+    </script>
+
+</body>
+</html>
