@@ -1,0 +1,66 @@
+.table-container {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    color: #e0e0e0;
+    height: 20vh;
+    max-height: 20vh;
+    overflow-y: auto;
+
+    thead {
+        background-color: #007bff;
+        color: #e0e0e0;
+        position: sticky;
+        top: 0;
+    }
+
+    th {
+        padding: 12px;
+    }
+
+    td {
+        padding: 12px;
+        text-align: center;
+    }
+
+    tbody {
+
+        tr:nth-child(even) {
+            background-color: #2a2a2a;
+        }
+
+        tr:hover {
+            background-color: #333;
+            transition: background-color 0.2s;
+        }
+    }
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #007bff;
+    border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0056b3;
+}
+
+::-webkit-scrollbar-corner {
+    background: #1e1e1e;
+}

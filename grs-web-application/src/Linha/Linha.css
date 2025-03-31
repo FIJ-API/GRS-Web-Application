@@ -1,0 +1,8 @@
+.tdActions {
+    display: flex;
+    gap: 5px;
+
+    button {
+        padding: 10px;
+    }
+}
