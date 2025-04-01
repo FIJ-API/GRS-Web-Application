@@ -1,0 +1,217 @@
+:root {
+    --primaryLight: #016101;
+    --secundaryLight: #014401;
+    --tableLight: #C6C6C6;
+    --baseLight: #E0E0E0;
+    --fontLight: #121212;
+    --borderLight: #CCC;
+    --lineLight: #D6D6D6;
+    --modalLight: #FFF;
+
+    --primaryDark: #007bff;
+    --secundaryDark: #0056b3;
+    --tableDark: #1E1E1E;
+    --baseDark: #121212;
+    --fontDark: #E0E0E0;
+    --borderDark: #333;
+    --lineDark: #2a2a2a;
+}
+
+.light {
+    background-color: var(--baseLight);
+    color: var(--fontLight);
+
+    button {
+        background-color: var(--primaryLight);
+    }
+
+    button:hover {
+        border-color: var(--lineLight);
+    }
+
+    button:focus,
+    button:focus-visible {
+        outline: 4px auto -webkit-focus-ring-color;
+    }
+
+    .botaoLateral {
+        background: var(--primaryLight);
+    }
+
+    .botaoLateral:hover {
+        background: var(--secundaryLight);
+    }
+
+    .modal {
+        .modal-content {
+            border: 1px solid var(--borderLight);
+            background-color: var(--modalLight);
+
+            input {
+                background: var(--fontDark);
+            }
+        }
+
+        .modal-header .header-box {
+            border-left: solid var(--borderDark) 1px;
+            border-right: solid var(--borderDark) 1px;
+            border-bottom: solid var(--borderDark) 1px;
+        }
+    }
+
+    form {
+        input {
+            border: 1px solid var(--borderLight);
+            color: var(--fontLight);
+        }
+
+        button {
+            background-color: var(--primaryLight);
+        }
+
+        button:hover {
+            background-color: var(--secundaryLight);
+        }
+    }
+
+    table {
+        background-color: var(--tableLight);
+        box-shadow: 0px 4px 8px #4D000000;
+
+        thead {
+            background-color: var(--primaryLight);
+            color: var(--fontDark);
+        }
+
+        tbody {
+            tr:nth-child(even) {
+                background-color: var(--lineLight);
+            }
+
+            tr:hover {
+                background-color: var(--borderLight);
+                transition: background-color 0.2s;
+            }
+        }
+    }
+
+    .swalAlerta {
+        background-color: var(--fontDark);
+        color: var(--fontLight);
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--lineLight);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--primaryLight);
+        border-radius: 0;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--secundaryLight);
+    }
+
+    ::-webkit-scrollbar-corner {
+        background: var(--lineLight);
+    }
+}
+
+.dark {
+    background-color: var(--baseDark);
+    color: var(--fontDark);
+
+    button {
+        background-color: #1A1A1A;
+    }
+
+    button:hover {
+        border-color: #646cff;
+    }
+
+    button:focus,
+    button:focus-visible {
+        outline: 4px auto -webkit-focus-ring-color;
+    }
+
+    .botaoLateral {
+        background: var(--primaryDark);
+    }
+
+    .botaoLateral:hover {
+        background: var(--secundaryDark);
+    }
+
+    .modal {
+        .modal-content {
+            border: 1px solid var(--borderDark);
+            background-color: var(--baseDark);
+
+            input {
+                background: var(--tableDark);
+            }
+        }
+
+        .modal-header .header-box {
+            border-left: solid var(--borderLight) 1px;
+            border-right: solid var(--borderLight) 1px;
+            border-bottom: solid var(--borderLight) 1px;
+        }
+    }
+
+    form {
+        input {
+            border: 1px solid var(--borderDark);
+        }
+
+        button {
+            background-color: var(--primaryDark);
+        }
+
+        button:hover {
+            background-color: var(--secundaryDark);
+        }
+    }
+
+    table {
+        background-color: var(--tableDark);
+
+        thead {
+            background-color: var(--primaryDark);
+        }
+
+        tbody {
+            tr:nth-child(even) {
+                background-color: var(--lineDark);
+            }
+
+            tr:hover {
+                background-color: var(--borderDark);
+                transition: background-color 0.2s;
+            }
+        }
+    }
+
+    .swalAlerta {
+        background-color: var(--lineDark);
+        color: var(--fontDark);
+    }
+
+    ::-webkit-scrollbar-track {
+        background: var(--tableDark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--primaryDark);
+        border-radius: 0;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--secundaryDark);
+    }
+
+    ::-webkit-scrollbar-corner {
+        background: var(--tableDark);
+    }
+}

@@ -4,7 +4,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,13 +11,10 @@
 
     .modal-content {
         position: absolute;
-        background-color: #121212;
         padding: 0 20px 20px 20px;
         border-radius: 8px;
         width: 400px;
         max-width: 100%;
-        color: #e0e0e0;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 
     }
 
@@ -34,9 +30,6 @@
         .header-box {
             width: 160px;
             height: 10px;
-            border-left: solid#333 1px;
-            border-right: solid#333 1px;
-            border-bottom: solid#333 1px;
             border-radius: 0 0 15px 15px;
         }
     }
@@ -47,11 +40,11 @@
         left: 10px;
         font-size: 24px;
         cursor: pointer;
-        color: #e0e0e0;
     }
 
     h2 {
         text-align: center;
+        margin-bottom: 0;
     }
 }
 
@@ -70,21 +63,23 @@ form {
     input {
         margin-left: 10px;
         padding: 8px;
-        border: 1px solid #333;
         border-radius: 4px;
         flex: 1;
     }
 
+    .inputFile {
+        margin: 0;
+        display: block;
+        padding: 10px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        margin-bottom: 14px;
+    }
+
     button {
         padding: 10px;
-        background-color: #007bff;
-        color: white;
         border: none;
         border-radius: 4px;
         cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #0056b3;
     }
 }

@@ -3,7 +3,7 @@ import React from "react";
 import './Modal.css';
 import SwitchButton from "../SwitchButton/SwitchButton";
 
-const Modal = ({ showModal, fechar, postBodyCam, putBodyCam, bodycam }) => {
+const Modal = ({ showModal, fechar, postBodyCam, putBodyCam, bodycam, uploadFile }) => {
     if (!showModal) return null;
 
 
@@ -14,12 +14,18 @@ const Modal = ({ showModal, fechar, postBodyCam, putBodyCam, bodycam }) => {
     const [revenda, setRevenda] = useState(bodycam?.revenda || "");
     const [diasAVencer, setDiasAVencer] = useState(bodycam?.diasAVencer || "");
     const [chip, setChip] = useState(bodycam?.chip || false);
+    const [file, setFile] = useState(null);
 
     const modalRef = useRef(null);
 
     const handlePostBodyCam = () => {
-        const newBodyCam = { modelo, numeroDeSerie, chip, estado, vendedor, revenda, diasAVencer };
-        postBodyCam(newBodyCam);
+        if (!file) {
+            const newBodyCam = { modelo, numeroDeSerie, chip, estado, vendedor, revenda, diasAVencer };
+            postBodyCam(newBodyCam);
+        } else {
+            console.log("Arquivo selecionado:", file);
+            uploadFile(file);
+        }
     };
 
     const handlePutBodyCam = () => {
@@ -57,11 +63,11 @@ const Modal = ({ showModal, fechar, postBodyCam, putBodyCam, bodycam }) => {
                 <form onSubmit={(e) => e.preventDefault()}>
                     <label>
                         Modelo:
-                        <input autocomplete="off" type="text" id="modelo" value={modelo} onChange={(e) => setModelo(e.target.value)} />
+                        <input autocomplete="off" type="text" value={modelo} onChange={(e) => setModelo(e.target.value)} />
                     </label>
                     <label>
                         Número de Série:
-                        <input autocomplete="off" type="text" id="numeroDeSerie" value={numeroDeSerie} onChange={(e) => setNumeroDeSerie(e.target.value)} />
+                        <input autocomplete="off" type="text" value={numeroDeSerie} onChange={(e) => setNumeroDeSerie(e.target.value)} />
                     </label>
                     <label>
                         Chip:
@@ -69,15 +75,15 @@ const Modal = ({ showModal, fechar, postBodyCam, putBodyCam, bodycam }) => {
                     </label>
                     <label>
                         Estado:
-                        <input autocomplete="off" type="text" id="estado" value={estado} onChange={(e) => setEstado(e.target.value)} />
+                        <input autocomplete="off" type="text" value={estado} onChange={(e) => setEstado(e.target.value)} />
                     </label>
                     <label>
                         Vendedor:
-                        <input autocomplete="off" type="text" id="vendedor" value={vendedor} onChange={(e) => setVendedor(e.target.value)} />
+                        <input autocomplete="off" type="text" value={vendedor} onChange={(e) => setVendedor(e.target.value)} />
                     </label>
                     <label>
                         Revenda:
-                        <input autocomplete="off" type="text" id="revenda" value={revenda} onChange={(e) => setRevenda(e.target.value)} />
+                        <input autocomplete="off" type="text" value={revenda} onChange={(e) => setRevenda(e.target.value)} />
                     </label>
                     {bodycam == null ? (
                         <>
@@ -86,11 +92,13 @@ const Modal = ({ showModal, fechar, postBodyCam, putBodyCam, bodycam }) => {
                                 <input
                                     autoComplete="off"
                                     type="number"
-                                    id="diasAVencer"
                                     value={diasAVencer}
-                                    onChange={(e) => setDiasAVencer(Number(e.target.value) || 0)}
+                                    onChange={(e) => setDiasAVencer(Number(e.target.value) || null)}
                                 />
                             </label>
+
+                            <input type="file" className="inputFile" onChange={(e) => setFile(e.target.files[0] || null)} />
+
                             <button type="button" onClick={handlePostBodyCam}>Enviar</button>
                         </>
                     ) : (

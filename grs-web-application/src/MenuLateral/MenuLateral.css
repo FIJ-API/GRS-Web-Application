@@ -1,0 +1,10 @@
+.menuLateral {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: fixed;
+    bottom: 3vh;
+    right: 3vh;
+    width: 60px;
+    height: 150px;
+}

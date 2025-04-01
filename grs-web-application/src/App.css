@@ -6,9 +6,6 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #121212;
-  /* background-color: #242424; */
-  color: #e0e0e0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,27 +15,19 @@ body {
   h2 {
     margin-bottom: 40px;
   }
-}
 
-@media (max-width: 600px) {
-  table {
-    width: 100%;
+  button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.25s;
   }
 }
 
-.adicionarNovaLinha {
-  position: fixed;
-  bottom: 3vh;
-  right: 3vh;
-  font-size: 40px;
-  background: #007bff;
-  color: #e0e0e0;
-  padding: 0;
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-}
-
-.adicionarNovaLinha:hover {
-  background: #0056b3;
+@media (max-width: 400px) {
+  table {
+    width: 10vw;
+  }
 }
