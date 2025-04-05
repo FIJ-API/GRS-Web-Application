@@ -1,18 +1,19 @@
+import { useEffect, useState } from "react";
 import Linha from "../Linha/Linha";
 import "./Tabela.css"
 
-const Tabela = ({ dados, toogleModal, deleteBodyCam }) => {
-
-    const handleToogleModal = () => {
-        toogleModal(null);
-    }
+const Tabela = ({ dados, toogleModal, atualizarTabela }) => {
 
     return (
         <div className="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        {dados.length > 0 &&
+                            Object.keys(dados[0]).map((chave) => (
+                                <th>{chave.charAt(0).toUpperCase() + chave.slice(1)}</th>
+                            ))}
+                        {/* <th>Id</th>
                         <th>Modelo</th>
                         <th>Número de Série</th>
                         <th>Chip</th>
@@ -20,18 +21,13 @@ const Tabela = ({ dados, toogleModal, deleteBodyCam }) => {
                         <th>Vendedor</th>
                         <th>Revenda</th>
                         <th>Saída</th>
-                        <th>Devolução</th>
+                        <th>Devolução</th>*/}
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {/* <tr>
-                        <th colSpan="10">
-                            <button onClick={handleToogleModal}>+</button>
-                        </th>
-                    </tr> */}
                     {dados.map((item) => (
-                        <Linha item={item} deleteBodyCam={deleteBodyCam} toogleModal={toogleModal} />
+                        <Linha item={item} toogleModal={toogleModal} atualizarTabela={atualizarTabela} />
                     ))}
                 </tbody>
             </table>
